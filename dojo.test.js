@@ -23,4 +23,10 @@ describe('Household mix', () => {
       expect(withdraw(35)).toEqual({ '5': 1, '10': 1, '20': 1 })
     })
   })
+
+  describe('four notes', () => {
+    it('returns one of 5, one of 10, one of 20 and one of 50 when ask 85', () => {
+      expect(withdraw(85)).toEqual({ '5': 1, '10': 1, '20': 1, '50': 1 })
+    })
+  })
 })
