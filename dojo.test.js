@@ -41,4 +41,32 @@ describe('Household mix', () => {
       })
     })
   })
+
+  describe('from small to big and from bi to small notes', () => {
+    describe('all notes', () => {
+      it('returns one of every note and 20 twice when ask 105', () => {
+        expect(withdraw(105)).toEqual({ '5': 1, '10': 1, '20': 2, '50': 1 })
+      })
+
+      it('returns one of every note and 10 and 20 twice when ask 115', () => {
+        expect(withdraw(115)).toEqual({ '5': 1, '10': 2, '20': 2, '50': 1 })
+      })
+
+      it('returns one of every note and 5, 10 and 20 twice when ask 120', () => {
+        expect(withdraw(120)).toEqual({ '5': 2, '10': 2, '20': 2, '50': 1 })
+      })
+
+      it('returns twice every note when ask 170', () => {
+        expect(withdraw(170)).toEqual({ '5': 2, '10': 2, '20': 2, '50': 2 })
+      })
+
+      it('returns 5: 2, 10: 2, 20: 1 and 50: 2 when ask 150', () => {
+        expect(withdraw(150)).toEqual({ '5': 2, '10': 2, '20': 1, '50': 2 })
+      })
+
+      it('returns 5: 2, 10: 1, 20: 2 and 50: 3 when ask 210', () => {
+        expect(withdraw(210)).toEqual({ '5': 2, '10': 1, '20': 2, '50': 3 })
+      })
+    })
+  })
 })
