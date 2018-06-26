@@ -1,30 +1,13 @@
 const NOTES = [5, 10, 20, 50]
 
-
 const getMoney = (value, notes) => {
-  const smallest = Math.min(...notes.filter(note => note <= value))
+  const biggest = Math.max(...notes)
 
-  if (value === 0) {
-    return []
-  } else if(notes.length === 0) {
-    return getBigMoney(value, NOTES.slice().reverse())
-  } else {
-    const newValue = value - smallest
-    const newNotes = newValue === smallest ? [smallest] : notes.slice(1)
-
-    return [{ [smallest] : 1 }].concat(getMoney(newValue, newNotes))
-  }
-}
-
-const getBigMoney = (value, notes) => {
-  if (value === 0 || notes.length === 0) {
-    return []
-  } else if (value >= notes[0]) {
-    return [{ [notes[0]] : 1 }].concat(getBigMoney((value - notes[0]), notes))
-  }
-  else {
-    return getBigMoney(value, notes.slice(1))
-  }
+  if (value === 0 || notes.length === 0) { return [] }
+  else if (notes[0] === biggest && value >= biggest) { return [{ [notes[0]] : 1 }].concat(getMoney((value - biggest), notes)) }
+  else if (notes[0] === biggest) { return getMoney(value, notes.slice(1).sort((a, b) => b - a)) }
+  else if (value >= notes[0]) { return [{ [notes[0]] : 1 }].concat(getMoney((value - notes[0]), notes.slice(1).concat(notes[0]))) }
+  else { return getMoney(value, notes.slice(1)) }
 }
 
 const withdraw = (value) =>
